@@ -20,10 +20,12 @@ import {
   CatalogIcon,
   Content,
   DocsIcon,
+  GitHubIcon,
   Header,
   Page,
 } from '@backstage/core-components';
 import { useApi } from '@backstage/core-plugin-api';
+import { GithubIssueResultListItem } from './GithubIssueListItem';
 
 const useStyles = makeStyles((theme: Theme) => ({
   bar: {
@@ -58,8 +60,13 @@ const SearchPage = () => {
           <Grid item xs={3}>
             <SearchType.Accordion
               name="Result Type"
-              defaultValue="software-catalog"
+              defaultValue="github-issue"
               types={[
+                {
+                  value: 'github-issue',
+                  name: 'Github Issues',
+                  icon: <GitHubIcon />,
+                },
                 {
                   value: 'software-catalog',
                   name: 'Software Catalog',
@@ -114,6 +121,13 @@ const SearchPage = () => {
                 <List>
                   {results.map(({ type, document }) => {
                     switch (type) {
+                      case 'github-issue':
+                        return (
+                          <GithubIssueResultListItem
+                            key={document.location}
+                            result={document}
+                          />
+                        );
                       case 'software-catalog':
                         return (
                           <CatalogResultListItem
