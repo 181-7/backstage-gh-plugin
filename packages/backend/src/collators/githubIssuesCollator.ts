@@ -1,6 +1,7 @@
 import { IndexableDocument, DocumentCollator } from '@backstage/search-common';
 import fetch from 'cross-fetch';
 
+const BASE_URL = 'https://api.github.com/repos/backstage/backstage';
 export interface GithubIssueDocument extends IndexableDocument {
     author: string;
     avatar: string;
@@ -20,8 +21,7 @@ export class GithubIssuesCollator implements DocumentCollator {
     public readonly type: string = 'github-issue';
 
     async execute() {
-        const baseUrl = 'https://api.github.com/repos/backstage/backstage';
-        const results = await fetch(`${baseUrl}/issues`);
+        const results = await fetch(`${BASE_URL}/issues`);
         const data = await results.json();
 
         return data.map(
