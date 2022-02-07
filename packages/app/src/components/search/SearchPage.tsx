@@ -20,6 +20,7 @@ import {
   CatalogIcon,
   Content,
   DocsIcon,
+  GitHubIcon,
   Header,
   Page,
 } from '@backstage/core-components';
@@ -59,12 +60,12 @@ const SearchPage = () => {
           <Grid item xs={3}>
             <SearchType.Accordion
               name="Result Type"
-              defaultValue="software-catalog"
+              defaultValue="github-issue"
               types={[
                 {
                   value: 'github-issue',
                   name: 'Github Issues',
-                  icon: <CatalogIcon />,
+                  icon: <GitHubIcon />,
                 },
                 {
                   value: 'software-catalog',
